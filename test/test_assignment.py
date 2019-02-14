@@ -26,6 +26,7 @@ def test_solve_when_answer_size_not_match(assignment):
 
 def test_solve(assignment):
     assignment.solve([[True, False], [False, True, True, False], [True, False, False]])
+    assert assignment.solution is not None
 
 
 def test_evaluate_when_no_solution(assignment):
