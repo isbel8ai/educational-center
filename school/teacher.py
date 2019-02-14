@@ -1,4 +1,4 @@
-from question import Question
+from school.question import Question
 
 
 class Teacher:

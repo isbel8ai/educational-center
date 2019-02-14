@@ -1,4 +1,4 @@
-from assignment import Assignment
+from school.assignment import Assignment
 
 
 class Student:
@@ -17,7 +17,7 @@ class Student:
 
     def solve_assignment(self, assignment_idx, solution):
         """
-
+        Saves a solution provided by student
         :param assignment_idx:
         :param solution:
         """
