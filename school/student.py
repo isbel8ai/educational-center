@@ -22,7 +22,7 @@ class Student:
         :param solution:
         :return True if solution has correct format and False if not
         """
-        if assignment_idx < len(self.assignments):
+        if 0 <= assignment_idx < len(self.assignments):
             return self.assignments[assignment_idx].solve(solution)
         else:
             raise IndexError()
