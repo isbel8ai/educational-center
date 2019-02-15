@@ -40,7 +40,8 @@ class Teacher:
         :param student_idx:
         :param semester:
         """
-        if quiz_idx < len(self.quizzes) and group_idx < len(self.groups) and student_idx < len(self.groups[group_idx]):
+        if 0 <= quiz_idx < len(self.quizzes) and 0 <= group_idx < len(self.groups) and 0 <= student_idx < len(
+                self.groups[group_idx]):
             self.groups[group_idx][student_idx].add_assignment(self.quizzes[quiz_idx], semester)
         else:
             raise IndexError()
