@@ -10,15 +10,25 @@ class Assignment:
         Validates the solution data structure, if it is correct 'solution' is set as assignment solution,
         if not raise ValueError
         :param solution: list of answers for each question on the quiz
+        :return True if solution has correct format and False if not
         """
-        if len(solution) != len(self.quiz):
-            raise ValueError()
+        if solution is None or len(solution) != len(self.quiz):
+            return False
+
+        answered = False
 
         for i, question in enumerate(self.quiz):
+            if solution[i] is None:
+                continue
+            else:
+                answered = True
             if len(solution[i]) != len(self.quiz[i].answer):
-                raise ValueError()
+                return False
 
-        self.solution = solution
+        if answered:
+            self.solution = solution
+            return True
+        return False
 
     def evaluate(self):
         """
@@ -26,15 +36,18 @@ class Assignment:
         :return: solution accuracy percent
         """
         if self.solution is None:
-            raise ValueError()
+            return False
 
         total_choices = 0.0
         correct_choices = 0.0
 
         for i, question in enumerate(self.quiz):
-            for j, choice in enumerate(self.quiz[i].answer):
-                total_choices += 1
-                if self.solution[i][j] == choice:
-                    correct_choices += 1
+            if self.solution[i] is None:
+                total_choices += len(question.answer)
+            else:
+                for j, choice in enumerate(question.answer):
+                    total_choices += 1
+                    if self.solution[i][j] == choice:
+                        correct_choices += 1
 
         return correct_choices / total_choices * 100.0
