@@ -45,3 +45,9 @@ class Teacher:
             self.groups[group_idx][student_idx].add_assignment(self.quizzes[quiz_idx], semester)
         else:
             raise IndexError()
+
+    def grade_student(self, group_idx, student_idx, semester):
+        if 0 <= group_idx < len(self.groups) and 0 <= student_idx < len(self.groups[group_idx]):
+            return self.groups[group_idx][student_idx].grade(semester)
+        else:
+            raise IndexError()
