@@ -15,23 +15,32 @@ def assignment():
 
 
 def test_solve_when_solution_size_not_match(assignment):
-    with pytest.raises(ValueError):
-        assignment.solve([[True, False]])
+    assert not assignment.solve([[True, False]])
 
 
 def test_solve_when_answer_size_not_match(assignment):
-    with pytest.raises(ValueError):
-        assignment.solve([[True, False, True], [False, True, True, False], [True, False, False]])
+    assert not assignment.solve([[True, False, True], [False, True, True, False], [True, False, False]])
+
+
+def test_solve_partial_solution(assignment):
+    assert assignment.solve([None, [False, True, True, False], [True, False, False]])
+
+
+def test_solve_blank_solution(assignment):
+    assert not assignment.solve([None, None, None])
 
 
 def test_solve(assignment):
-    assignment.solve([[True, False], [False, True, True, False], [True, False, False]])
-    assert assignment.solution is not None
+    assert assignment.solve([[True, False], [False, True, True, False], [True, False, False]])
 
 
 def test_evaluate_when_no_solution(assignment):
-    with pytest.raises(ValueError):
-        assignment.evaluate()
+    assert not assignment.evaluate()
+
+
+def test_evaluate_partial_solution(assignment):
+    assignment.solve([None, [True, True, True, False], [True, False, False]])
+    assert assignment.evaluate() == 6 / 9 * 100
 
 
 def test_evaluate(assignment):
