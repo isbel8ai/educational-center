@@ -21,7 +21,7 @@ class Teacher:
         if questions_count == 0:
             return False
 
-        if len(choices_sets) != questions_count or answers != questions_count:
+        if len(choices_sets) != questions_count or len(answers) != questions_count:
             return False
 
         quiz = []
