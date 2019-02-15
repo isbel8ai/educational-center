@@ -23,6 +23,13 @@ def teacher_with_quiz(new_teacher):
     return new_teacher
 
 
+@pytest.fixture
+def teacher_grading(teacher_with_quiz):
+    teacher_with_quiz.assign_quiz(0, 0, 0, 1)
+    teacher_with_quiz.groups[0][0].solve_assignment(0, [None, [False, True, True, False], [True, False, False]])
+    return teacher_with_quiz
+
+
 def test_create_quiz_no_statements(new_teacher):
     statements = []
     choices_sets = [["black", "white"], ["1", "3", "5", "8"], ["apple", "dog", "table"]]
@@ -72,3 +79,17 @@ def test_assign_quiz_with_student_idx_out_of_range(teacher_with_quiz):
 
 def test_assign_quiz(teacher_with_quiz):
     teacher_with_quiz.assign_quiz(0, 0, 0, 1)
+
+
+def test_grade_student_group_idx_out_of_range(teacher_grading):
+    with pytest.raises(IndexError):
+        teacher_grading.grade_student(5, 0, 1)
+
+
+def test_grade_student_student_idx_out_of_range(teacher_grading):
+    with pytest.raises(IndexError):
+        teacher_grading.grade_student(0, 3, 1)
+
+
+def test_grade_student(teacher_grading):
+    assert teacher_grading.grade_student(0, 0, 1) == 7 / 9 * 100
