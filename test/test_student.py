@@ -53,7 +53,7 @@ def test_solve_assignment_idx_out_of_range(student_with_assignments):
 
 
 def test_solve_assignment(student_with_assignments):
-    student_with_assignments.solve_assignment(1, [[False, True], [False, False, False, True]])
+    assert student_with_assignments.solve_assignment(1, [[False, True], [False, False, False, True]])
 
 
 def test_grade_no_assignments_on_semester(responsible_student):
