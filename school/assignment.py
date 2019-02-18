@@ -42,12 +42,9 @@ class Assignment:
         correct_choices = 0.0
 
         for i, question in enumerate(self.quiz):
-            if self.solution[i] is None:
-                total_choices += len(question.answer)
-            else:
+            total_choices += len(question.answer)
+            if self.solution[i]:
                 for j, choice in enumerate(question.answer):
-                    total_choices += 1
-                    if self.solution[i][j] == choice:
-                        correct_choices += 1
+                    correct_choices += float(self.solution[i][j] == choice)
 
         return correct_choices / total_choices * 100.0
